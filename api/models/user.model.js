@@ -25,6 +25,14 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isPartner: {
+      type: Boolean,
+      default: false,
+    },
+    Partner: {
+      type: String,
+      default: ""
+    },
   },
   { timestamps: true }
 );
