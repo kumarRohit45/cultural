@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Label, Dropdown } from "flowbite-react";
 import DoubleSlider from "../components/DoubleSlider";
 
+
 export default function Search() {
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [from, setFrom] = useState("");

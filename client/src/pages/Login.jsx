@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 
@@ -36,5 +37,6 @@ export default function Login() {
         <Button type="submit">Submit</Button>
       </form>
     </div>
-  )
+  );
+
 }
