@@ -38,13 +38,14 @@ const marks = [
 ];
 
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value * 500}`;
 }
 
 export default function DoubleSlider() {
   return (
     <Box sx={{ width: 190 }}>
       
+
       <Typography id="track-inverted-range-slider" gutterBottom>
        Choose Your Price Range
       </Typography>

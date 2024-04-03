@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Label, Dropdown } from "flowbite-react";
 import DoubleSlider from "../components/DoubleSlider";
 
-const Search = () => {
+
+export default function Search() {
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -293,5 +294,3 @@ const Search = () => {
     </div>
   );
 };
-
-export default Search;
