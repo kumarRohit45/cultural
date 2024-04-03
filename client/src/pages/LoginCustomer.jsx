@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 
-export default function Login() {
+export default function LoginCustomer() {
   return (
     <div className="w-screen h-screen flex justify-center items-center gap-10">
       <div className="w-[400px]">
