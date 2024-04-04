@@ -9,6 +9,7 @@ import About from './pages/About'
 import Search from './pages/Search'
 import Loginas from './pages/Loginas'
 import Signuppartner from './pages/Signuppartner'
+import Customtrip from './pages/Customtrip'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           < Route path='/search' element= { <Search />} />
           < Route path='/loginas' element= { <Loginas />} />
           < Route path='/signup-partner' element= { <Signuppartner />} />
+          < Route path='/customtrip' element= { <Customtrip />} />
       </Routes>
       < Footer />
     </BrowserRouter>
