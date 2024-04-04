@@ -1,12 +1,38 @@
 import React, { useState } from 'react';
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import {useNavigate} from 'react-router-dom'
+import { KEY_ACCESS_TOKEN, setItem } from '../utils/auth';
+import { axiosClient } from '../utils/const';
 
 export default function Loginas() {
+
+  const navigate = useNavigate();
   const [loginType, setLoginType] = useState('USER'); // Default to USER form
+  const [username,setUsername] = useState("");
+  const [password,setPassword]  =  useState("");
 
   const handleLoginTypeChange = (type) => {
     setLoginType(type);
   };
+  // console.log(username,password)
+
+  const handleSubmit = async(e)=>{
+       e.preventDefault();
+       try{
+        
+        const response = await axiosClient.post('/api/auth/signin',{
+          username,
+          password
+        });
+
+        setItem(KEY_ACCESS_TOKEN)
+         console.log(username,password)
+         navigate('/dashboard')
+        }catch(e){
+
+        }
+
+  }
 
   return (
     <div className='flex flex-col items-center justify-center h-full bg-gray-100 py-8'>
@@ -27,18 +53,18 @@ export default function Loginas() {
             <Label htmlFor="text" value={`Login as ${loginType}`} className="text-lg font-semibold text-gray-800" />
           </div>
           <div>
-            <Label htmlFor="email1" value="Your email" className="text-sm font-semibold text-gray-800" />
-            <TextInput id="email1" type="email" placeholder="Enter your email" required />
+            <Label htmlFor="userName"  className="text-sm font-semibold text-gray-800" />
+            <TextInput id="userName" type="text" value={username} placeholder="Enter your userName" required onChange={(e)=>{setUsername(e.target.value)}} />
           </div>
           <div>
-            <Label htmlFor="password1" value="Your password" className="text-sm font-semibold text-gray-800" />
-            <TextInput id="password1" type="password" placeholder='Enter Password' required />
+            <Label htmlFor="password1"   className="text-sm font-semibold text-gray-800" />
+            <TextInput id="password1" type="password" value={password} placeholder='Enter Password' required onChange={(e)=>{setPassword(e.target.value)}}/>
           </div>
           <div className="flex items-center gap-2">
             <Checkbox id="remember" className="rounded" />
             <Label htmlFor="remember" className="text-sm font-semibold text-gray-800">Remember me</Label>
           </div>
-          <Button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 rounded transition duration-300">Submit</Button>
+          <Button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 rounded transition duration-300" onClick={handleSubmit}>Submit</Button>
         </form>
       </Card>
     </div>
