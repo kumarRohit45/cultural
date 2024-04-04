@@ -1,67 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function Signuppartner() {
   const [formData, setFormData] = useState({
-    companyName: '',
-    email: '',
-    password: '',
-    reEnterPassword: '',
-    category: '',
-    phoneNumber: '',
+    companyName: "",
+    email: "",
+    password: "",
+    reEnterPassword: "",
+    category: "",
+    phoneNumber: "",
     guideInfo: {
-      name: '',
-      location: '',
-      photo: ''
+      name: "",
+      location: "",
+      photo: "",
     },
     hotelInfo: {
-      location: '',
-      rating: '',
-      rooms: ''
+      location: "",
+      rating: "",
+      rooms: "",
     },
     cabInfo: {
-      carType: '',
-      registrationNumber: ''
-    }
+      carType: "",
+      registrationNumber: "",
+    },
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleGuideInfoChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       guideInfo: {
         ...prevState.guideInfo,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
   const handleHotelInfoChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       hotelInfo: {
         ...prevState.hotelInfo,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
   const handleCabInfoChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       cabInfo: {
         ...prevState.cabInfo,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
@@ -71,35 +71,58 @@ export default function Signuppartner() {
     console.log(formData);
     // Reset form fields after submission
     setFormData({
-      companyName: '',
-      email: '',
-      password: '',
-      reEnterPassword: '',
-      category: '',
-      phoneNumber: '',
+      companyName: "",
+      email: "",
+      password: "",
+      reEnterPassword: "",
+      category: "",
+      phoneNumber: "",
       guideInfo: {
-        name: '',
-        location: '',
-        photo: ''
+        name: "",
+        location: "",
+        photo: "",
       },
       hotelInfo: {
-        location: '',
-        rating: '',
-        rooms: ''
+        location: "",
+        rating: "",
+        rooms: "",
       },
       cabInfo: {
-        carType: '',
-        registrationNumber: ''
-      }
+        carType: "",
+        registrationNumber: "",
+      },
     });
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-3xl font-bold text-center mb-4 text-gray-800">Partner Sign Up</h2>
+    <div className="w-full max-w-5xl mx-auto flex gap-10">
+      <div className="flex-1 flex flex-col p-10 gap-5 justify-center">
+        <img
+          className="w-full object-cover rounded-[30px]"
+          src="https://images.unsplash.com/photo-1707343846292-56e4c6abf291?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+        />
+
+        <p className="text-gray-700 text-sm w-[50ch]">
+          Sign up on our Cultural Tourism website for personalized experiences,
+          exclusive access to offers and content, easy planning, community
+          engagement, regular updates, and top-notch security. Join us in
+          celebrating diversity, fostering dialogue, and exploring our shared
+          heritage. Sign up now for an enriching cultural journey.
+        </p>
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex-1"
+      >
+        <h2 className="text-3xl font-bold text-center mb-4 text-gray-800">
+          Partner Sign Up
+        </h2>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="category">
+          <label
+            className="block text-sm font-semibold mb-2 text-gray-700"
+            htmlFor="category"
+          >
             Register As
           </label>
           <select
@@ -118,7 +141,10 @@ export default function Signuppartner() {
           </select>
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="name">
+          <label
+            className="block text-sm font-semibold mb-2 text-gray-700"
+            htmlFor="name"
+          >
             Name
           </label>
           <input
@@ -133,7 +159,10 @@ export default function Signuppartner() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="phoneNumber">
+          <label
+            className="block text-sm font-semibold mb-2 text-gray-700"
+            htmlFor="phoneNumber"
+          >
             Phone Number
           </label>
           <input
@@ -148,7 +177,10 @@ export default function Signuppartner() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="password">
+          <label
+            className="block text-sm font-semibold mb-2 text-gray-700"
+            htmlFor="password"
+          >
             Password
           </label>
           <input
@@ -163,7 +195,10 @@ export default function Signuppartner() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="reEnterPassword">
+          <label
+            className="block text-sm font-semibold mb-2 text-gray-700"
+            htmlFor="reEnterPassword"
+          >
             Re-Enter Password
           </label>
           <input
@@ -177,10 +212,13 @@ export default function Signuppartner() {
             required
           />
         </div>
-        {formData.category === 'Guide' && (
+        {formData.category === "Guide" && (
           <div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="guideName">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="guideName"
+              >
                 Guide Name
               </label>
               <input
@@ -195,7 +233,10 @@ export default function Signuppartner() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="location">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="location"
+              >
                 Guide Location
               </label>
               <input
@@ -210,7 +251,10 @@ export default function Signuppartner() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="photo">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="photo"
+              >
                 Guide Photo
               </label>
               <input
@@ -225,10 +269,13 @@ export default function Signuppartner() {
             </div>
           </div>
         )}
-        {formData.category === 'Hotel Owner' && (
+        {formData.category === "Hotel Owner" && (
           <div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="hotelLocation">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="hotelLocation"
+              >
                 Hotel Location
               </label>
               <input
@@ -243,7 +290,10 @@ export default function Signuppartner() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="rating">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="rating"
+              >
                 Hotel Rating
               </label>
               <input
@@ -258,7 +308,10 @@ export default function Signuppartner() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="rooms">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="rooms"
+              >
                 Number of Rooms
               </label>
               <input
@@ -274,10 +327,13 @@ export default function Signuppartner() {
             </div>
           </div>
         )}
-        {formData.category === 'Cab Owner' && (
+        {formData.category === "Cab Owner" && (
           <div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="carType">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="carType"
+              >
                 Car Type
               </label>
               <input
@@ -292,7 +348,10 @@ export default function Signuppartner() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700" htmlFor="registrationNumber">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="registrationNumber"
+              >
                 Registration Number
               </label>
               <input

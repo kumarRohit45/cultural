@@ -11,7 +11,7 @@ import {
 export default function FooterComponent() {
   return (
     <Footer container>
-      <div className="w-full">
+      <div className="w-full border-t pt-2">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
             <Footer.Brand

@@ -7,8 +7,6 @@ import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import About from './pages/About'
 import Search from './pages/Search'
-import LoginCustomer from './pages/LoginCustomer'
-import LoginPartner from './pages/LoginPartner'
 import Loginas from './pages/Loginas'
 import Signuppartner from './pages/Signuppartner'
 
@@ -20,12 +18,10 @@ export default function App() {
           < Route path='/' element= { <Home />} />
           < Route path='/about' element= { <About />} />
           < Route path='/dashboard' element= { <Dashboard />} />
-          < Route path='/login' element= { <LoginCustomer />} />
-          < Route path='/login-partner' element= { <LoginPartner />} />
-          < Route path='/signup' element= { <SignUp />} />
+          < Route path='/sign-up' element= { <SignUp />} />
           < Route path='/search' element= { <Search />} />
           < Route path='/loginas' element= { <Loginas />} />
-          < Route path='/signuppartner' element= { <Signuppartner />} />
+          < Route path='/signup-partner' element= { <Signuppartner />} />
       </Routes>
       < Footer />
     </BrowserRouter>
