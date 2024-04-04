@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Navbar } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -15,7 +16,9 @@ export default function Header() {
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">
-        <Button>Login</Button>
+        <Link to="/loginas">
+          <Button>Login</Button>
+        </Link>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
