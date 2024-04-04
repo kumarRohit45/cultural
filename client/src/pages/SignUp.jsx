@@ -58,7 +58,7 @@ export default function Signup() {
           src="https://images.unsplash.com/photo-1707343846292-56e4c6abf291?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
         />
-        <p className="text-gray-700 text-sm w-[50ch]">
+        <p className="text-gray-700 text-sm w-[50ch] ">
           Sign up on our Cultural Tourism website for personalized experiences,
           exclusive access to offers and content, easy planning, community
           engagement, regular updates, and top-notch security. Join us in

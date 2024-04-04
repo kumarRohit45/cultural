@@ -32,39 +32,6 @@ export default function Signuppartner() {
     }));
   };
 
-  const handleGuideInfoChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      guideInfo: {
-        ...prevState.guideInfo,
-        [name]: value,
-      },
-    }));
-  };
-
-  const handleHotelInfoChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      hotelInfo: {
-        ...prevState.hotelInfo,
-        [name]: value,
-      },
-    }));
-  };
-
-  const handleCabInfoChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      cabInfo: {
-        ...prevState.cabInfo,
-        [name]: value,
-      },
-    }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -101,7 +68,7 @@ export default function Signuppartner() {
           alt=""
         />
 
-        <p className="text-gray-700 text-sm w-[50ch]">
+        <p className="text-gray-700 text-sm w-[50ch] mt-6">
           Sign up on our Cultural Tourism website for personalized experiences,
           exclusive access to offers and content, easy planning, community
           engagement, regular updates, and top-notch security. Join us in
@@ -138,26 +105,24 @@ export default function Signuppartner() {
             {/* Add more options as needed */}
           </select>
         </div>
-        {formData.category !== "Hotel Owner" && formData.category !== "Cab Owner" && (
-          <div className="mb-4">
-            <label
-              className="block text-sm font-semibold mb-2 text-gray-700"
-              htmlFor="name"
-            >
-              User Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        )}
+        <div className="mb-4">
+          <label
+            className="block text-sm font-semibold mb-2 text-gray-700"
+            htmlFor="name"
+          >
+            User Name
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="name"
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div className="mb-4">
           <label
             className="block text-sm font-semibold mb-2 text-gray-700"
@@ -212,8 +177,8 @@ export default function Signuppartner() {
             required
           />
         </div>
-        {formData.category === "Guide" && (
-          <div>
+        {(formData.category === "Guide") && (
+          <>
             <div className="mb-4">
               <label
                 className="block text-sm font-semibold mb-2 text-gray-700"
@@ -228,7 +193,7 @@ export default function Signuppartner() {
                 name="guideName"
                 placeholder="Enter guide name"
                 value={formData.guideInfo.name}
-                onChange={handleGuideInfoChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -244,7 +209,7 @@ export default function Signuppartner() {
                 id="location"
                 name="location"
                 value={formData.guideInfo.location}
-                onChange={handleGuideInfoChange}
+                onChange={handleChange}
                 required
               >
                 <option value="" disabled>Select guide location</option>
@@ -300,109 +265,11 @@ export default function Signuppartner() {
                 type="file"
                 name="photo"
                 accept="image/*"
-                onChange={handleGuideInfoChange}
+                onChange={handleChange}
                 required
               />
             </div>
-          </div>
-        )}
-        {formData.category === "Hotel Owner" && (
-          <div>
-            <div className="mb-4">
-              <label
-                className="block text-sm font-semibold mb-2 text-gray-700"
-                htmlFor="hotelLocation"
-              >
-                Hotel Location
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="hotelLocation"
-                type="text"
-                name="hotelLocation"
-                placeholder="Enter hotel location"
-                value={formData.hotelInfo.location}
-                onChange={handleHotelInfoChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-sm font-semibold mb-2 text-gray-700"
-                htmlFor="rating"
-              >
-                Hotel Rating
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="rating"
-                type="text"
-                name="rating"
-                placeholder="Enter hotel rating"
-                value={formData.hotelInfo.rating}
-                onChange={handleHotelInfoChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-sm font-semibold mb-2 text-gray-700"
-                htmlFor="rooms"
-              >
-                Number of Rooms
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="rooms"
-                type="number"
-                name="rooms"
-                placeholder="Enter number of rooms"
-                value={formData.hotelInfo.rooms}
-                onChange={handleHotelInfoChange}
-                required
-              />
-            </div>
-          </div>
-        )}
-        {formData.category === "Cab Owner" && (
-          <div>
-            <div className="mb-4">
-              <label
-                className="block text-sm font-semibold mb-2 text-gray-700"
-                htmlFor="carType"
-              >
-                Car Type
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="carType"
-                type="text"
-                name="carType"
-                placeholder="Enter car type"
-                value={formData.cabInfo.carType}
-                onChange={handleCabInfoChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-sm font-semibold mb-2 text-gray-700"
-                htmlFor="registrationNumber"
-              >
-                Registration Number
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="registrationNumber"
-                type="text"
-                name="registrationNumber"
-                placeholder="Enter registration number"
-                value={formData.cabInfo.registrationNumber}
-                onChange={handleCabInfoChange}
-                required
-              />
-            </div>
-          </div>
+          </>
         )}
         <div className="flex items-center justify-center">
           <button
