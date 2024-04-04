@@ -26,10 +26,24 @@ export default function Signuppartner() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    // If the name is nested (like guideInfo.location), handle nested state update
+    if (name.includes('.')) {
+      const [parent, child] = name.split('.');
+      setFormData((prevState) => ({
+        ...prevState,
+        [parent]: {
+          ...prevState[parent],
+          [child]: value,
+        },
+      }));
+    } else {
+      // If the name is not nested, update the state normally
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -207,48 +221,48 @@ export default function Signuppartner() {
               <select
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="location"
-                name="location"
+                name="guideInfo.location"
                 value={formData.guideInfo.location}
                 onChange={handleChange}
                 required
               >
                 <option value="" disabled>Select guide location</option>
                 <option value="AP">Andhra Pradesh</option>
-	<option value="AR">Arunachal Pradesh</option>
-	<option value="AS">Assam</option>
-	<option value="BR">Bihar</option>
-	<option value="CT">Chhattisgarh</option>
-	<option value="GA">Gujarat</option>
-	<option value="HR">Haryana</option>
-	<option value="HP">Himachal Pradesh</option>
-	<option value="JK">Jammu and Kashmir</option>
-	<option value="GA">Goa</option>
-	<option value="JH">Jharkhand</option>
-	<option value="KA">Karnataka</option>
-	<option value="KL">Kerala</option>
-	<option value="MP">Madhya Pradesh</option>
-	<option value="MH">Maharashtra</option>
-        <option value="MN">Manipur</option>
-        <option value="ML">Meghalaya</option>
-	<option value="MZ">Mizoram</option>
-	<option value="NL">Nagaland</option>
-	<option value="OR">Odisha</option>
-	<option value="PB">Punjab</option>
-	<option value="RJ">Rajasthan</option>
-	<option value="SK">Sikkim</option>
-	<option value="TN">Tamil Nadu</option>
-	<option value="TG">Telangana</option>
-	<option value="TR">Tripura</option>
-	<option value="UT">Uttarakhand</option>
-	<option value="UP">Uttar Pradesh</option>
-	<option value="WB">West Bengal</option>
-	<option value="AN">Andaman and Nicobar Islands</option>
-	<option value="CH">Chandigarh</option>
-	<option value="DN">Dadra and Nagar Haveli</option>
-	<option value="DD">Daman and Diu</option>
-	<option value="DL">Delhi</option>
-	<option value="LD">Lakshadweep</option>
-	<option value="PY">Puducherry</option>
+                <option value="AR">Arunachal Pradesh</option>
+                <option value="AS">Assam</option>
+                <option value="BR">Bihar</option>
+                <option value="CT">Chhattisgarh</option>
+                <option value="GA">Gujarat</option>
+                <option value="HR">Haryana</option>
+                <option value="HP">Himachal Pradesh</option>
+                <option value="JK">Jammu and Kashmir</option>
+                <option value="GA">Goa</option>
+                <option value="JH">Jharkhand</option>
+                <option value="KA">Karnataka</option>
+                <option value="KL">Kerala</option>
+                <option value="MP">Madhya Pradesh</option>
+                <option value="MH">Maharashtra</option>
+                <option value="MN">Manipur</option>
+                <option value="ML">Meghalaya</option>
+                <option value="MZ">Mizoram</option>
+                <option value="NL">Nagaland</option>
+                <option value="OR">Odisha</option>
+                <option value="PB">Punjab</option>
+                <option value="RJ">Rajasthan</option>
+                <option value="SK">Sikkim</option>
+                <option value="TN">Tamil Nadu</option>
+                <option value="TG">Telangana</option>
+                <option value="TR">Tripura</option>
+                <option value="UT">Uttarakhand</option>
+                <option value="UP">Uttar Pradesh</option>
+                <option value="WB">West Bengal</option>
+                <option value="AN">Andaman and Nicobar Islands</option>
+                <option value="CH">Chandigarh</option>
+                <option value="DN">Dadra and Nagar Haveli</option>
+                <option value="DD">Daman and Diu</option>
+                <option value="DL">Delhi</option>
+                <option value="LD">Lakshadweep</option>
+                <option value="PY">Puducherry</option>
                 {/* Add more options as needed */}
               </select>
             </div>
