@@ -12,16 +12,8 @@ export default function Signuppartner() {
       name: "",
       location: "",
       photo: "",
-    },
-    hotelInfo: {
-      location: "",
-      rating: "",
-      rooms: "",
-    },
-    cabInfo: {
-      carType: "",
-      registrationNumber: "",
-    },
+      phoneNumber: "",
+    }
   });
 
   const handleChange = (e) => {
@@ -60,15 +52,7 @@ export default function Signuppartner() {
         name: "",
         location: "",
         photo: "",
-      },
-      hotelInfo: {
-        location: "",
-        rating: "",
-        rooms: "",
-      },
-      cabInfo: {
-        carType: "",
-        registrationNumber: "",
+        phoneNumber: "",
       },
     });
   };
@@ -207,6 +191,24 @@ export default function Signuppartner() {
                 name="guideName"
                 placeholder="Enter guide name"
                 value={formData.guideInfo.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-sm font-semibold mb-2 text-gray-700"
+                htmlFor="guidePhonenumber"
+              >
+                Guide Phone Number
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="guidePhoneNumber"
+                type="text"
+                name="guidePhoneNumber"
+                placeholder="Enter guide phone number"
+                value={formData.guideInfo.phoneNumber}
                 onChange={handleChange}
                 required
               />

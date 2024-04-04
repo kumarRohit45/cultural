@@ -30,7 +30,7 @@ export default function Home() {
                 type="date"
               />
               <input
-                class="w-44 h-10 outline-none rounded-lg border-transparent ml-[13rem] ml-[1px]"
+                class="w-44 h-10 outline-none rounded-lg border-transparent ml-[1px]"
                 type="date"
               />
 
