@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Label, Dropdown } from "flowbite-react";
 import DoubleSlider from "../components/DoubleSlider";
-
+import PackageCard from "../components/PackageCard";
+import { Link } from "react-router-dom";
 
 export default function Search() {
   const [priceRange, setPriceRange] = useState([0, 50000]);
@@ -40,7 +41,12 @@ export default function Search() {
   };
   const destinationsWithPlaces = {
     Delhi: ["Qutub Minar", "Red Fort", "India Gate", "Lotus Temple"],
-    Uttarakhand: ["Jim Corbett National Park", "Mussoorie", "Nainital", "Haridwar"],
+    Uttarakhand: [
+      "Jim Corbett National Park",
+      "Mussoorie",
+      "Nainital",
+      "Haridwar",
+    ],
     // Add more destinations and their popular places as needed
   };
 
@@ -157,20 +163,18 @@ export default function Search() {
           >
             Search
           </button>
-          <button
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          <Link to= "/customtrip"
+            className="w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             onClick={handleCustomTrip}
           >
             Custom Trip
-          </button>
+          </Link>
         </div>
 
         <div className="flex mt-14">
           <div className="w-full md:w-3/12 pr-2">
             <div className="text-gray-700">
-              <h3 className="text-lg font-semibold mb-8">
-                Filter Your Trip
-              </h3>
+              <h3 className="text-lg font-semibold mb-8">Filter Your Trip</h3>
               <div className="flex max-w-md flex-col gap-4">
                 <DoubleSlider />
                 <div>
@@ -272,25 +276,31 @@ export default function Search() {
                   >
                     <option value="">Select Destination</option>
                     {selectedDestination &&
-                      destinationsWithPlaces[selectedDestination].map((place) => (
-                        <option key={place} value={place}>
-                          {place}
-                        </option>
-                      ))}
+                      destinationsWithPlaces[selectedDestination].map(
+                        (place) => (
+                          <option key={place} value={place}>
+                            {place}
+                          </option>
+                        )
+                      )}
                   </select>
                 </div>
               </div>
             </div>
           </div>
-          <div className="w-full md:w-9/12 pl-2 border-l-2 ml-0">
-            <h3 className="text-lg font-semibold mb-2">Trending Trip</h3>
-            <p className="text-gray-600">
-              This side for Trending or Cultural Development of the place you
-              are going to visit.
-            </p>
+          <div className="w-full md:w-9/12 border-l-2 ml-0">
+            <h3 className="text-2xl font-bold mb-10">Trending Trip</h3>
+            <div className="flex space-y-4 flex-col items-center">
+              <PackageCard />
+              <PackageCard />
+              <PackageCard />
+              <PackageCard />
+              <PackageCard />
+              <button className="bg-blue-600 w-72 h-10 rounded-full text-white">See More</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}

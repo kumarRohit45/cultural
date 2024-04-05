@@ -1,11 +1,12 @@
 import React from "react";
 import { Card } from "flowbite-react";
 import { FaArrowRightLong } from "react-icons/fa6";
+import {Link} from "react-router-dom"
 export default function PackageCard() {
   return (
     <div>
       <Card
-        className="max-w-sm ml-[100px] w-[700px] h-[200px] bg-gray-100 justify-start flex overflow-hidden"
+        className="max-w-sm w-[700px] h-[200px] bg-gray-100 justify-start flex overflow-hidden"
 
         imgSrc="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         horizontal 
@@ -33,7 +34,7 @@ export default function PackageCard() {
         <p class="-mt-[100px] text-[23px] ml-60 bg-gray-300 w-[130px] h-[40px] flex pl-[10px] rounded-lg">₹22,999</p>
         </div>
       
-        <button class="bg-blue-600 rounded-lg w-24 p-[7px] absolute ml-[240px] mt-[125px] text-white">Book Now</button>
+        <Link to="" class="bg-blue-600 rounded-lg w-24 p-[7px] absolute ml-[240px] mt-[125px] text-white">Book Now</Link>
       </Card>
     </div>
   );

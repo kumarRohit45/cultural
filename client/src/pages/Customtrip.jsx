@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Customtrip() {
   const [from, setFrom] = useState("");
@@ -12,7 +13,7 @@ export default function Customtrip() {
     totalFare: 0,
     totalHotelFare: 0,
     totalCabFare: 0,
-    totalPlaceFare: 0
+    totalPlaceFare: 0,
   });
   const [isFareSplitEnabled, setIsFareSplitEnabled] = useState(false);
 
@@ -48,15 +49,13 @@ export default function Customtrip() {
 
       let totalFareValue = totalPlaceFare + totalHotelFare + totalCabFare;
       if (isFareSplitEnabled) {
-       
-       
       }
 
       setTotalFare({
         totalFare: totalFareValue,
         totalHotelFare,
         totalCabFare,
-        totalPlaceFare
+        totalPlaceFare,
       });
     };
 
@@ -116,7 +115,9 @@ export default function Customtrip() {
   return (
     <div className="h-fullscreen flex items-center justify-center bg-gray-100 w-fullscreen border border-blue-300 mt-2">
       <div className="w-[1000px] p-5 border border-gray-300 mt-4">
-        <h2 className="mb-4 text-lg font-semibold">Customize Your Dream Trip</h2>
+        <h2 className="mb-4 text-lg font-semibold">
+          Customize Your Dream Trip
+        </h2>
         <div className="flex flex-wrap mb-4">
           <div className="w-full md:w-1/2 pr-2">
             <label
@@ -515,9 +516,7 @@ export default function Customtrip() {
             )}
           </div>
         </div>
-        <div className="text-lg font-semibold mb-2">
-          Total Fare: ₹{totalFare.totalFare.toFixed(2)}
-        </div>
+
         <div className="flex items-center mb-4">
           <input
             type="checkbox"
@@ -546,13 +545,17 @@ export default function Customtrip() {
             </div>
           </div>
         )}
+        <div className="text-lg font-semibold mb-2">
+          Total Fare: ₹{totalFare.totalFare.toFixed(2)}
+        </div>
         <div className="flex">
-          <button
+          <Link
+            to="/userdetails"
             className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             onClick={handleSearch}
           >
             Book Now
-          </button>
+          </Link>
         </div>
       </div>
     </div>

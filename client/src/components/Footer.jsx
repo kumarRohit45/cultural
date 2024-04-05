@@ -14,18 +14,18 @@ export default function FooterComponent() {
       <div className="w-full border-t pt-2">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
-            <Footer.Brand
+            <Footer.Brand sizes="xl"
               href="https://flowbite.com"
               src="https://seeklogo.com/images/B/beach-tour-logo-4505456896-seeklogo.com.png"
               alt="Flowbite Logo"
-              name="Flowbite"
+              name="Cultural Tourism"
             />
           </div>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             <div>
               <Footer.Title title="about" />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Flowbite</Footer.Link>
+                <Footer.Link href="#">Cultural Tourism</Footer.Link>
                 <Footer.Link href="#">Tailwind CSS</Footer.Link>
               </Footer.LinkGroup>
             </div>
