@@ -1,60 +1,22 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 export default function Signuppartner() {
-  const [formData, setFormData] = useState({
-    companyName: "",
-    email: "",
-    password: "",
-    reEnterPassword: "",
-    category: "",
-    phoneNumber: "",
-    guideInfo: {
-      name: "",
-      location: "",
-      photo: "",
-      phoneNumber: "",
-    }
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    // If the name is nested (like guideInfo.location), handle nested state update
-    if (name.includes('.')) {
-      const [parent, child] = name.split('.');
-      setFormData((prevState) => ({
-        ...prevState,
-        [parent]: {
-          ...prevState[parent],
-          [child]: value,
-        },
-      }));
-    } else {
-      // If the name is not nested, update the state normally
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
-  };
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repassword, setRepassword] = useState("");
+  const [isPartner, setIsPartner] = useState(true);
+  const [partner, setPartner] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [photo, setPhoto] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  console.log(partner);
+  console.log(photo)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData({
-      companyName: "",
-      email: "",
-      password: "",
-      reEnterPassword: "",
-      category: "",
-      phoneNumber: "",
-      guideInfo: {
-        name: "",
-        location: "",
-        photo: "",
-        phoneNumber: "",
-      },
-    });
+    
   };
 
   return (
@@ -92,11 +54,13 @@ export default function Signuppartner() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="category"
             name="category"
-            value={formData.category}
-            onChange={handleChange}
+            value={partner}
+            onChange={(e) => setPartner(e.target.value)}
             required
           >
-            <option value="" disabled>Select your category</option>
+            <option value="" disabled>
+              Select your category
+            </option>
             <option value="Guide">Guide</option>
             <option value="Hotel Owner">Hotel Owner</option>
             <option value="Cab Owner">Cab Owner</option>
@@ -116,8 +80,8 @@ export default function Signuppartner() {
             type="text"
             name="name"
             placeholder="Enter your name"
-            value={formData.name}
-            onChange={handleChange}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
@@ -134,8 +98,8 @@ export default function Signuppartner() {
             type="email"
             name="email"
             placeholder="Enter your E-mail"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -152,8 +116,8 @@ export default function Signuppartner() {
             type="password"
             name="password"
             placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             required
           />
         </div>
@@ -170,12 +134,12 @@ export default function Signuppartner() {
             type="password"
             name="reEnterPassword"
             placeholder="Re-enter your password"
-            value={formData.reEnterPassword}
-            onChange={handleChange}
+            value={repassword}
+            onChange={e => setRepassword(e.target.value)}
             required
           />
         </div>
-        {(formData.category === "Guide") && (
+        {partner === "Guide" && (
           <>
             <div className="mb-4">
               <label
@@ -190,8 +154,8 @@ export default function Signuppartner() {
                 type="text"
                 name="guideName"
                 placeholder="Enter guide name"
-                value={formData.guideInfo.name}
-                onChange={handleChange}
+                value={name}
+                onChange={e => setName(e.target.value)}
                 required
               />
             </div>
@@ -208,8 +172,8 @@ export default function Signuppartner() {
                 type="text"
                 name="guidePhoneNumber"
                 placeholder="Enter guide phone number"
-                value={formData.guideInfo.phoneNumber}
-                onChange={handleChange}
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
                 required
               />
             </div>
@@ -224,47 +188,49 @@ export default function Signuppartner() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="location"
                 name="guideInfo.location"
-                value={formData.guideInfo.location}
-                onChange={handleChange}
+                value={address}
+                onChange={e => setAddress(e.target.value)}
                 required
               >
-                <option value="" disabled>Select guide location</option>
-                <option value="AP">Andhra Pradesh</option>
-                <option value="AR">Arunachal Pradesh</option>
-                <option value="AS">Assam</option>
-                <option value="BR">Bihar</option>
-                <option value="CT">Chhattisgarh</option>
-                <option value="GA">Gujarat</option>
-                <option value="HR">Haryana</option>
-                <option value="HP">Himachal Pradesh</option>
-                <option value="JK">Jammu and Kashmir</option>
-                <option value="GA">Goa</option>
-                <option value="JH">Jharkhand</option>
-                <option value="KA">Karnataka</option>
-                <option value="KL">Kerala</option>
-                <option value="MP">Madhya Pradesh</option>
-                <option value="MH">Maharashtra</option>
-                <option value="MN">Manipur</option>
-                <option value="ML">Meghalaya</option>
-                <option value="MZ">Mizoram</option>
-                <option value="NL">Nagaland</option>
-                <option value="OR">Odisha</option>
-                <option value="PB">Punjab</option>
-                <option value="RJ">Rajasthan</option>
-                <option value="SK">Sikkim</option>
-                <option value="TN">Tamil Nadu</option>
-                <option value="TG">Telangana</option>
-                <option value="TR">Tripura</option>
-                <option value="UT">Uttarakhand</option>
-                <option value="UP">Uttar Pradesh</option>
-                <option value="WB">West Bengal</option>
-                <option value="AN">Andaman and Nicobar Islands</option>
-                <option value="CH">Chandigarh</option>
-                <option value="DN">Dadra and Nagar Haveli</option>
-                <option value="DD">Daman and Diu</option>
-                <option value="DL">Delhi</option>
-                <option value="LD">Lakshadweep</option>
-                <option value="PY">Puducherry</option>
+                <option value="" disabled>
+                  Select guide location
+                </option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                <option value="Goa">Goa</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                <option value="Daman and Diu">Daman and Diu</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Lakshadweep">Lakshadweep</option>
+                <option value="Puducherry">Puducherry</option>
                 {/* Add more options as needed */}
               </select>
             </div>
@@ -281,12 +247,18 @@ export default function Signuppartner() {
                 type="file"
                 name="photo"
                 accept="image/*"
-                onChange={handleChange}
+                onChange={e => setPhoto(e.target.value)}
                 required
               />
             </div>
           </>
         )}
+        <div className="flex items-center justify-center my-5 gap-2">
+          <p>Signup as User?</p>
+          <Link to="/sign-up" className="text-blue-500 hover:text-blue-700">
+            Click here
+          </Link>
+        </div>
         <div className="flex items-center justify-center">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
