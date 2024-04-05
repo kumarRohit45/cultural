@@ -2,10 +2,10 @@ import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
+import Guide from "../models/guide.model.js";
 
 export const signin = async (req, res, next) => {
   const { username, password } = req.body;
- 
 
   if (!username || !password || username === "" || password === "") {
     return next(errorHandler(404, "All fields are required!"));
@@ -66,7 +66,17 @@ export const signupUser = async (req, res, next) => {
 };
 
 export const signupPartner = async (req, res, next) => {
-  const { username, email, password, isPartner, partner } = req.body;
+  const {
+    username,
+    email,
+    password,
+    isPartner,
+    partner,
+    name,
+    address,
+    photo,
+    phoneNumber,
+  } = req.body;
   if (
     !username ||
     !email ||
@@ -82,11 +92,29 @@ export const signupPartner = async (req, res, next) => {
   }
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  const newUser = new User({ username, email, password: hashedPassword, isPartner, partner });
+  const newUser = new User({
+    username,
+    email,
+    password: hashedPassword,
+    isPartner,
+    partner,
+  });
 
   try {
     await newUser.save();
-    res.json({ message: "Signup as a partner successful!" });
+
+    if (partner === "Guide") {
+      const guide = new Guide({
+        userId: newUser._id,
+        name,
+        address,
+        photo,
+        phoneNumber,
+      });
+      await guide.save();
+    }
+
+    res.status(200).json({ message: "Signup as a partner successful!" });
   } catch (error) {
     next(error);
   }
@@ -159,7 +187,7 @@ export const googlePartner = async (req, res, next) => {
         })
         .json(rest);
     } else {
-      if(!isPartner || !partner || partner === "") {
+      if (!isPartner || !partner || partner === "") {
         return next(errorHandler(400, "All fields are required"));
       }
       const gereratePassword =
@@ -174,7 +202,7 @@ export const googlePartner = async (req, res, next) => {
         password: hashedPassword,
         profilePicture: googlePhotoUrl,
         isPartner,
-        partner
+        partner,
       });
       await newUser.save();
       const token = jwt.sign(
