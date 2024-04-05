@@ -14,6 +14,8 @@ import Userdetails from "./pages/Userdetails";
 import DashboardPartner from "./pages/DashboardPartner";
 import AdminDashboard from "./pages/AdminDashboard";
 import Cabregister from './pages/Cabregister';
+import Trippackage from './pages/Trippackage'
+
 
 export default function App() {
   return (
@@ -32,6 +34,7 @@ export default function App() {
         <Route path="/customtrip" element={<Customtrip />} />
         <Route path="/userdetails" element={<Userdetails />} />
         < Route path='/cabregister' element= { <Cabregister />} />
+        < Route path='/trippackage' element= { <Trippackage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

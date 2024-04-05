@@ -1,7 +1,10 @@
 import React from "react";
 import PackageCard from "../components/PackageCard";
+import { Link } from "react-router-dom";
 
 export default function Home() {
+  const handleSearch = async (req, res, next) => {};
+
   return (
     <div>
       <div class="Homepage h-[auto] w-full bg-gray-200">
@@ -47,9 +50,12 @@ export default function Home() {
                 <option value="9">9</option>
               </select>
             </div>
-            <button class="bg-blue-500 text-white w-[32rem] h-12 absolute mt-32 ml-[13rem] rounded-md">
+            <Link
+              to="/search"
+              class="bg-blue-500 text-white text-center p-3 w-[32rem] h-12 absolute mt-32 ml-[13rem] rounded-md"
+            >
               Search
-            </button>
+            </Link>
           </div>
         </div>
 
