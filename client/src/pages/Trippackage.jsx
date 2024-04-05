@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom"
 
 export default function Trippackage() {
   const [formData, setFormData] = useState({
@@ -15,22 +16,9 @@ export default function Trippackage() {
     totalFare: 5000 // Dummy total fare value
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  
 
-  const handlePlacesToVisitChange = (e) => {
-    const { value } = e.target;
-    setFormData({
-      ...formData,
-      placesToVisit: [...formData.placesToVisit, value]
-    });
-  };
-
+  
   const handleAddToFavorites = () => {
     // Implement logic to add trip to favorites
     console.log('Trip added to favorites:', formData);
@@ -39,7 +27,6 @@ export default function Trippackage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    console.log(formData);
   };
 
   return (
@@ -64,20 +51,18 @@ export default function Trippackage() {
           <p>Total Fare: ₹{formData.totalFare}</p>
         </div>
         <div className="flex justify-center">
-          <button 
-            type="button" 
+          <Link to="/" 
             onClick={handleAddToFavorites} 
             className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
           >
             Add to Favorites
-          </button>
-          <button 
-            type="submit" 
+          </Link>
+          <Link to="/userdetails" 
             onClick={handleSubmit} 
             className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline ml-4"
           >
             Book Now
-          </button>
+          </Link>
         </div>
       </div>
     </div>
