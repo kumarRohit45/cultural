@@ -92,15 +92,16 @@ export const signupPartner = async (req, res, next) => {
   }
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  const newUser = new User({
-    username,
-    email,
-    password: hashedPassword,
-    isPartner,
-    partner,
-  });
-
+  
   try {
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+      isPartner,
+      Partner: partner,
+      profilePicture: photo,
+    });
     await newUser.save();
 
     if (partner === "Guide") {

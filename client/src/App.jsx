@@ -19,6 +19,14 @@ import PrivateRoute from "./components/PrivateRoute";
 import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
 import OnlyPartnerPrivateRoute from "./components/OnlyPartnerPrivateRoute";
 import ScrollToTop from "./components/ScrollToTop";
+import Setting from "./pages/Setting";
+import FavouriteTour from "./pages/FavouriteTour";
+import BookedTour from "./pages/BookedTour";
+import PlaceRegister from "./pages/PlaceRegister";
+import HotelRegister from "./pages/HotelRegister";
+import OnGoingBooking from "./pages/OnGoingBooking";
+import CompletedBooking from "./pages/CompletedBooking";
+import UpCommingBooking from "./pages/UpCommingBooking";
 
 export default function App() {
   return (
@@ -30,13 +38,21 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/setting" element={<Setting />} />
+          <Route path="/favorite-tour" element={<FavouriteTour />} />
+          <Route path="/booked-tour" element={<BookedTour />} />
+          <Route path="/ongoing-booking" element={<OnGoingBooking />} />
+          <Route path="/upcomming-booking" element={<UpCommingBooking />} />
+          <Route path="/completed-booking" element={<CompletedBooking />} />
         </Route>
         <Route element={<OnlyAdminPrivateRoute />}>
           <Route path="/dashboard-admin" element={<AdminDashboard />} />
         </Route>
         <Route element={<OnlyPartnerPrivateRoute />}>
           <Route path="/dashboard-partner" element={<DashboardPartner />} />
-          <Route path="/cabregister" element={<Cabregister />} />
+          <Route path="/cab-register" element={<Cabregister />} />
+          <Route path="/hotel-register" element={<HotelRegister />} />
+          <Route path="/place-register" element={<PlaceRegister />} />
         </Route>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/search" element={<Search />} />

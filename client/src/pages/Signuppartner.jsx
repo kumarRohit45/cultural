@@ -1,5 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Alert, RangeSlider } from "flowbite-react";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { app } from "../firebase.js";
+
 export default function Signuppartner() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -9,14 +18,143 @@ export default function Signuppartner() {
   const [partner, setPartner] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [photo, setPhoto] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  console.log(partner);
-  console.log(photo)
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  // firebase storage for image
+  const [imageFile, setImageFile] = useState(null);
+  const [imageFileUrl, setImageFileUrl] = useState(null);
+  const [imageFileUploadingProgress, setImageFileUploadingProgress] =
+    useState(null);
+  const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const filePickerRef = useRef(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    const size = 2 * 1024 * 1024;
+    if (file && file.size < size) {
+      setImageFile(file);
+      setImageFileUrl(URL.createObjectURL(file));
+    } else {
+      setImageFileUploadError(
+        "Couldn't upload an image (File must be less then 2MB or not in Image Formet)"
+      );
+      setImageFileUploadingProgress(null);
+      setImageFile(null);
+      setImageFileUrl(null);
+    }
+  };
+  useEffect(() => {
+    if (imageFile) {
+      uploadImage();
+    }
+  }, [imageFile]);
+  const uploadImage = async () => {
+    setImageFileUploadError(null);
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + imageFile.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setImageFileUploadingProgress(progress.toFixed(0));
+      },
+      (error) => {
+        setImageFileUploadError(
+          "Couldn't upload an image (File must be less then 2MB or not in Image Formet)"
+        );
+        setImageFileUploadingProgress(null);
+        setImageFile(null);
+        setImageFileUrl(null);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+          setImageFile(downloadUrl);
+        });
+      }
+    );
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    if (password !== repassword) {
+      return setError("password not match");
+    }
+    if (username.length < 5 && username.length > 20) {
+      return setError("Username must be at between 6 to 20 characters");
+    }
+    if (password.length < 6 && password.length > 20) {
+      return setError("Password must be at least 6 characters");
+    }
+    if (!username || !email || !password || !repassword) {
+      return setError("Plesase fill out all the fields.");
+    }
+
+    if (partner === "") {
+      return setError("Plesase fill out all the fields.");
+    }
+
+    try {
+      setLoading(true);
+      if (partner === "Guide") {
+        if (!name || !address || !phoneNumber || !imageFile) {
+          return setError("Plesase fill out all the fields.");
+        }
+
+        const res = await fetch("/api/auth/signup-partner", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+            isPartner: true,
+            partner,
+            name,
+            address,
+            phoneNumber,
+            photo: imageFile,
+          }),
+        });
+
+        const data = await res.json();
+        setLoading(false);
+
+        if (res.ok) {
+          navigate("/loginas");
+        }
+      } else {
+        const res = await fetch("/api/auth/signup-partner", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+            isPartner: true,
+            partner,
+          }),
+        });
+
+        const data = await res.json();
+        setLoading(false);
+
+        if (res.ok) {
+          navigate("/loginas");
+        }
+      }
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -117,7 +255,7 @@ export default function Signuppartner() {
             name="password"
             placeholder="Enter your password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
@@ -135,7 +273,7 @@ export default function Signuppartner() {
             name="reEnterPassword"
             placeholder="Re-enter your password"
             value={repassword}
-            onChange={e => setRepassword(e.target.value)}
+            onChange={(e) => setRepassword(e.target.value)}
             required
           />
         </div>
@@ -155,7 +293,7 @@ export default function Signuppartner() {
                 name="guideName"
                 placeholder="Enter guide name"
                 value={name}
-                onChange={e => setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
@@ -173,7 +311,7 @@ export default function Signuppartner() {
                 name="guidePhoneNumber"
                 placeholder="Enter guide phone number"
                 value={phoneNumber}
-                onChange={e => setPhoneNumber(e.target.value)}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               />
             </div>
@@ -189,7 +327,7 @@ export default function Signuppartner() {
                 id="location"
                 name="guideInfo.location"
                 value={address}
-                onChange={e => setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 required
               >
                 <option value="" disabled>
@@ -224,9 +362,13 @@ export default function Signuppartner() {
                 <option value="Uttarakhand">Uttarakhand</option>
                 <option value="Uttar Pradesh">Uttar Pradesh</option>
                 <option value="West Bengal">West Bengal</option>
-                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                <option value="Andaman and Nicobar Islands">
+                  Andaman and Nicobar Islands
+                </option>
                 <option value="Chandigarh">Chandigarh</option>
-                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                <option value="Dadra and Nagar Haveli">
+                  Dadra and Nagar Haveli
+                </option>
                 <option value="Daman and Diu">Daman and Diu</option>
                 <option value="Delhi">Delhi</option>
                 <option value="Lakshadweep">Lakshadweep</option>
@@ -243,15 +385,41 @@ export default function Signuppartner() {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="photo"
                 type="file"
                 name="photo"
                 accept="image/*"
-                onChange={e => setPhoto(e.target.value)}
+                onChange={handleImageChange}
+                ref={filePickerRef}
                 required
               />
+              {imageFileUploadingProgress && (
+                <RangeSlider
+                  sizing="sm"
+                  className="w-72 mx-auto"
+                  value={imageFileUploadingProgress || 0}
+                  text={`${imageFileUploadingProgress}%`}
+                  strokeWidth={5}
+                  styles={{
+                    root: {
+                      width: "100%",
+                      height: "100%",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                    },
+                    path: {
+                      stroke: `rgba(62, 152, 199, ${
+                        imageFileUploadingProgress / 100
+                      })`,
+                    },
+                  }}
+                />
+              )}
             </div>
           </>
+        )}
+        {imageFileUploadError && (
+          <Alert color="failure">{imageFileUploadError}</Alert>
         )}
         <div className="flex items-center justify-center my-5 gap-2">
           <p>Signup as User?</p>
@@ -267,6 +435,11 @@ export default function Signuppartner() {
             Sign Up
           </button>
         </div>
+        {error && (
+          <Alert className="mt-5" color="failure">
+            {error}
+          </Alert>
+        )}
       </form>
     </div>
   );

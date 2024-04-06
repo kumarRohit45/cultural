@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { SignoutUserSuccess } from "../redux/User/userSlice";
 import { useLocation } from "react-router-dom";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -43,50 +44,50 @@ export default function Header() {
       </Link>
       <div className="flex md:order-2 gap-4">
         {currentUser ? (
-          <Dropdown
-            arrowIcon={false}
-            inline
-            label={
-              <Avatar alt="user" img={currentUser.profilePicture} rounded />
-            }
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">@{currentUser.username}</span>
-              <span className="block text-sm font-medium truncate">
-                {currentUser.email}
-              </span>
-            </Dropdown.Header>
-            {currentUser && currentUser.isAdmin && (
-              <Link to="/dashboard-admin">
-                <Dropdown.Item>Admin Dashboard</Dropdown.Item>
+          <div className="flex gap-4 items-center">
+            {!currentUser.isAdmin && !currentUser.isPartner && (
+              < Link to="/favorite-tour">
+                <GoHeart className="text-4xl font-extrabold" />
               </Link>
             )}
-            {currentUser && currentUser.isPartner && (
-              <Link to="/dashboard-partner">
-                <Dropdown.Item>Partner Dashboard</Dropdown.Item>
+
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar alt="user" img={currentUser.profilePicture} rounded />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">@{currentUser.username}</span>
+                <span className="block text-sm font-medium truncate">
+                  {currentUser.email}
+                </span>
+              </Dropdown.Header>
+              {currentUser && currentUser.isAdmin && (
+                <Link to="/dashboard-admin">
+                  <Dropdown.Item>Admin Dashboard</Dropdown.Item>
+                </Link>
+              )}
+              {currentUser && currentUser.isPartner && (
+                <Link to="/dashboard-partner">
+                  <Dropdown.Item>Partner Dashboard</Dropdown.Item>
+                </Link>
+              )}
+              {currentUser &&
+                !currentUser.isAdmin &&
+                !currentUser.isPartner && (
+                  <Link to="/Dashboard">
+                    <Dropdown.Item>Dashboard</Dropdown.Item>
+                  </Link>
+                )}
+              <Link to="/setting">
+                <Dropdown.Item>Profile</Dropdown.Item>
               </Link>
-            )}
-            {currentUser && !currentUser.isAdmin && !currentUser.isPartner && (
-              <Link to="/Dashboard">
-                <Dropdown.Item>Dashboard</Dropdown.Item>
-              </Link>
-            )}
-            {currentUser.isAdmin && (
-              <Link to="/dashboard-admin">
-                <Dropdown.Item>Dashboard</Dropdown.Item>
-              </Link>
-            )}
-            {currentUser.isPartner && (
-              <Link to="/dashboard-partner">
-                <Dropdown.Item>Dashboard</Dropdown.Item>
-              </Link>
-            )}
-            <Link to="/dashboard?tab=profile">
-              <Dropdown.Item>Profile</Dropdown.Item>
-            </Link>
-            <Dropdown.Divider />
-            <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
-          </Dropdown>
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+            </Dropdown>
+          </div>
         ) : (
           <>
             <Link to="/loginas">
